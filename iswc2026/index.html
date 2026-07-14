@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ISWC 2026 — Workshops &amp; Tutorials Schedule</title>
+<style>
+  :root{
+    --bg:#ffffff; --fg:#1a1a1a; --muted:#666; --line:#e2e2e2;
+    --accent:#0b5fa5; --accent-bg:#eaf3fb;
+    --ws:#0b5fa5; --ws-bg:#eaf3fb; --tut:#7a4bb0; --tut-bg:#f2ecfa;
+    --other:#0f7a6c; --other-bg:#e6f4f1;
+    --full:#b45309; --full-bg:#fdf3e7; --empty:#fafafa;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#16181c; --fg:#e8e8e8; --muted:#9aa0a6; --line:#2c2f36;
+      --accent:#5aa9e6; --accent-bg:#12263a;
+      --ws:#5aa9e6; --ws-bg:#12263a; --tut:#c3a5e8; --tut-bg:#241a33;
+      --other:#54c2b0; --other-bg:#0f2a27;
+      --full:#e0a25a; --full-bg:#2e2413; --empty:#1a1c20;
+    }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);
+    font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  header{padding:28px 22px 10px;max-width:1200px;margin:0 auto}
+  h1{font-size:1.5rem;margin:0 0 4px}
+  .sub{color:var(--muted);font-size:.92rem}
+  main{max-width:1200px;margin:0 auto;padding:0 22px 60px}
+  h2{font-size:1.15rem;margin:34px 0 8px;padding-bottom:6px;border-bottom:2px solid var(--line)}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:.82rem;color:var(--muted);margin:10px 0 4px}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  .scrollx{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  table.grid{border-collapse:collapse;width:100%;min-width:760px;margin-top:6px;font-size:.86rem}
+  table.grid th,table.grid td{border:1px solid var(--line);padding:6px 8px;vertical-align:top}
+  table.grid thead th{background:var(--empty);position:sticky;top:0;text-align:left;font-weight:600;white-space:nowrap}
+  table.grid th.room{white-space:nowrap;font-weight:600;background:var(--empty)}
+  table.grid td .cap{color:var(--muted);font-weight:400;font-size:.78rem}
+  .cell{display:block;text-decoration:none;color:inherit;border-radius:4px;padding:5px 7px;margin:-1px}
+  .cell.ws{background:var(--ws-bg)} .cell.tut{background:var(--tut-bg)} .cell.other{background:var(--other-bg)}
+  .cell:hover{outline:2px solid var(--accent)}
+  .cell b{display:block;font-weight:600;line-height:1.3}
+  .cell small{color:var(--muted)}
+  td.empty{background:var(--empty)}
+  tr.reserved th.room,tr.reserved td{opacity:.72}
+  tr.divided th.room{border-left:3px solid var(--tut)}
+  .rbadge{display:inline-block;font-size:.66rem;font-weight:600;padding:1px 6px;border-radius:10px;
+    background:var(--tut-bg);color:var(--tut);margin-top:3px}
+  .rbadge.free{background:var(--empty);color:var(--muted)}
+  .rooms-note{color:var(--muted);font-size:.8rem;margin:8px 0 0}
+  /* details */
+  .ev{border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;
+      padding:16px 18px;margin:16px 0;scroll-margin-top:14px}
+  .ev.ws{border-left-color:var(--ws)} .ev.tut{border-left-color:var(--tut)} .ev.other{border-left-color:var(--other)}
+  .ev h3{margin:0 0 8px;font-size:1.05rem}
+  .tags{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 10px}
+  .tag{font-size:.74rem;padding:2px 9px;border-radius:20px;background:var(--ws-bg);color:var(--ws);font-weight:600}
+  .tag.type-tut{background:var(--tut-bg);color:var(--tut)}
+  .tag.type-other{background:var(--other-bg);color:var(--other)}
+  .meta{display:grid;grid-template-columns:110px 1fr;gap:2px 12px;font-size:.9rem;margin:0 0 10px}
+  .meta dt{color:var(--muted)} .meta dd{margin:0}
+  .desc{font-size:.9rem;white-space:pre-line;color:var(--fg)}
+  .desc.collapsed{max-height:5.4em;overflow:hidden;position:relative}
+  .toggle{background:none;border:none;color:var(--accent);cursor:pointer;font-size:.82rem;padding:4px 0;font-weight:600}
+  a.back{font-size:.78rem;color:var(--muted);text-decoration:none;float:right}
+  a.back:hover{color:var(--accent)}
+  .err{padding:20px;border:1px solid var(--full);background:var(--full-bg);border-radius:8px;margin-top:20px}
+  code{background:var(--empty);padding:1px 5px;border-radius:4px}
+</style>
+</head>
+<body>
+<header id="top">
+  <h1>ISWC 2026 — Workshops &amp; Tutorials</h1>
+  <div class="sub" id="subtitle"></div>
+</header>
+<main id="app">Loading schedule…</main>
+
+<script>
+const SLOTLABEL = s => `Slot ${s}`;
+
+// HTML-escape any value before putting it inside an innerHTML string.
+function esc(v){
+  return String(v == null ? '' : v)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+// Return a safe http(s) URL or '' — blocks javascript:, data:, etc.
+function safeUrl(u){
+  try{ const p = new URL(u, document.baseURI);
+       return (p.protocol === 'http:' || p.protocol === 'https:') ? p.href : ''; }
+  catch(_){ return ''; }
+}
+
+function typeClass(e){
+  const c = e.category || (e.type.startsWith('Tutorial') ? 'tutorial' : 'workshop');
+  return c === 'tutorial' ? 'tut' : (c === 'other' ? 'other' : 'ws');
+}
+
+function render(cfg){
+  document.getElementById('subtitle').textContent =
+    `${cfg.dates} · ${cfg.rooms.length} rooms · ${cfg.events.length} events`;
+  const app = document.getElementById('app');
+  app.innerHTML = '';
+
+  const byId = Object.fromEntries(cfg.events.map(e=>[e.id,e]));
+  const slotById = Object.fromEntries(cfg.slots.map(s=>[s.id,s]));
+
+  // ---- Schedule-at-a-glance, one grid per day ----
+  cfg.days.forEach(day=>{
+    const h = document.createElement('h2');
+    h.textContent = `${day.name} — ${day.date}`;
+    app.appendChild(h);
+
+    const legend = document.createElement('div');
+    legend.className='legend';
+    legend.innerHTML =
+      `<span><i class="dot" style="background:var(--ws)"></i>Workshop</span>`+
+      `<span><i class="dot" style="background:var(--tut)"></i>Tutorial</span>`+
+      `<span><i class="dot" style="background:var(--other)"></i>Other event</span>`;
+    app.appendChild(legend);
+
+    // lookup: room -> slot -> event
+    const map = {};
+    cfg.events.filter(e=>e.day===day.id).forEach(e=>{
+      e.slots.forEach(s=>{ (map[e.room]=map[e.room]||{})[s]=e; });
+    });
+
+    const wrap = document.createElement('div'); wrap.className='scrollx';
+    const tbl = document.createElement('table'); tbl.className='grid';
+    // head
+    let head = '<thead><tr><th class="room">Room</th>';
+    cfg.slots.forEach(s=> head += `<th>${esc(SLOTLABEL(s.id))}<br><span style="font-weight:400;color:var(--muted)">${esc(s.time)}</span></th>`);
+    head += '</tr></thead>';
+    // body
+    let body = '<tbody>';
+    cfg.rooms.forEach(r=>{
+      const rowcls = (r.reserved?'reserved ':'') + (r.divided?'divided':'');
+      let badge = '';
+      if(r.reserved) badge = `<br><span class="rbadge free">kept free · other events</span>`;
+      else if(r.divided) badge = `<br><span class="rbadge">half of ${esc(r.parent)}</span>`;
+      body += `<tr class="${rowcls}"><th class="room">${esc(r.name)}`+
+              `<br><span class="cap">${esc(r.capacity)} pax · floor ${esc(r.floor)}</span>${badge}</th>`;
+      let s = 0;
+      while(s < cfg.slots.length){
+        const slotId = cfg.slots[s].id;
+        const e = (map[r.id]||{})[slotId];
+        if(e){
+          const cls = typeClass(e);
+          body += `<td colspan="${esc(e.slots.length)}"><a class="cell ${cls}" href="#ev-${encodeURIComponent(e.id)}">`+
+                  `<b>${esc(e.title)}</b><small>${esc(e.type)} · ${esc(e.duration)}</small></a></td>`;
+          s += e.slots.length;
+        } else {
+          body += `<td class="empty">—</td>`;
+          s += 1;
+        }
+      }
+      body += '</tr>';
+    });
+    body += '</tbody>';
+    tbl.innerHTML = head + body;
+    wrap.appendChild(tbl);
+    app.appendChild(wrap);
+  });
+
+  const note = document.createElement('p');
+  note.className='rooms-note';
+  note.innerHTML='Cells span the slots each event occupies. “—” marks an unused room-slot. '+
+    'Divisible rooms are shown split into halves; halves marked <b>kept free</b> are reserved for other small events, not workshops/tutorials. '+
+    'Click any event to see its details.';
+  app.appendChild(note);
+
+  // ---- Event details ----
+  const dh = document.createElement('h2');
+  dh.textContent='Event details';
+  app.appendChild(dh);
+
+  // order details by day, then first slot, then room
+  const roomName = Object.fromEntries(cfg.rooms.map(r=>[r.id,r.name]));
+  const dayName  = Object.fromEntries(cfg.days.map(d=>[d.id,`${d.name} (${d.date})`]));
+  const ordered = [...cfg.events].sort((a,b)=>
+     a.day.localeCompare(b.day) || a.slots[0]-b.slots[0] || roomName[a.room].localeCompare(roomName[b.room]));
+
+  ordered.forEach(e=>{
+    const sec = document.createElement('section');
+    sec.className = `ev ${typeClass(e)}`;
+    sec.id = `ev-${e.id}`;
+    const timeRange = `${slotById[e.slots[0]].time.split('–')[0]}–${slotById[e.slots[e.slots.length-1]].time.split('–')[1]}`;
+    const url = safeUrl(e.website);
+    const site = url ? `<dt>Website</dt><dd><a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(url)}</a></dd>` : '';
+    sec.innerHTML =
+      `<a class="back" href="#top">↑ back to schedule</a>`+
+      `<h3>${esc(e.title)}</h3>`+
+      `<div class="tags">`+
+        `<span class="tag type-${typeClass(e)}">${esc(e.type)}</span>`+
+        `<span class="tag type-${typeClass(e)}">${esc(e.duration)}</span>`+
+      `</div>`+
+      `<dl class="meta">`+
+        `<dt>Organizers</dt><dd>${esc(e.organizers)||'—'}</dd>`+
+        `<dt>Day / time</dt><dd>${esc(dayName[e.day])} · ${esc(timeRange)}</dd>`+
+        `<dt>Room</dt><dd>${esc(roomName[e.room])}</dd>`+
+        site+
+      `</dl>`+
+      `<div class="desc collapsed">${esc(e.description)}</div>`+
+      `<button class="toggle">Show more ▾</button>`;
+    app.appendChild(sec);
+  });
+
+  // collapse/expand long descriptions
+  app.querySelectorAll('.ev').forEach(sec=>{
+    const d = sec.querySelector('.desc'), btn = sec.querySelector('.toggle');
+    if(d.scrollHeight <= d.clientHeight + 4){ d.classList.remove('collapsed'); btn.remove(); return; }
+    btn.addEventListener('click',()=>{
+      d.classList.toggle('collapsed');
+      btn.textContent = d.classList.contains('collapsed') ? 'Show more ▾' : 'Show less ▴';
+    });
+  });
+}
+
+fetch('schedule.json')
+  .then(r=>{ if(!r.ok) throw new Error(r.status); return r.json(); })
+  .then(render)
+  .catch(err=>{
+    document.getElementById('app').innerHTML =
+      `<div class="err"><b>Could not load <code>schedule.json</code>.</b><br>`+
+      `Browsers block <code>fetch()</code> of local files opened via <code>file://</code>. `+
+      `Serve this folder over HTTP, e.g.:<br><br><code>python3 -m http.server</code><br><br>`+
+      `then open <code>http://localhost:8000/</code>.<br><small>(${esc(err && err.message || err)})</small></div>`;
+  });
+</script>
+</body>
+</html>
