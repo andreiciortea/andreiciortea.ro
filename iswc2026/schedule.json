@@ -107,8 +107,7 @@
       "capacity": 20,
       "floor": "2",
       "divided": true,
-      "parent": "Auriga–Perseo",
-      "reserved": true
+      "parent": "Auriga–Perseo"
     },
     {
       "id": "perseo",
@@ -391,10 +390,28 @@
       "website": "",
       "day": "day1",
       "slots": [
-        1
+        3
       ],
       "room": "pegaso",
-      "duration": "Special session · single slot (09:00–10:40)"
+      "duration": "Special session · single slot (14:10–15:50)"
+    },
+    {
+      "id": "neuralnets",
+      "number": "495",
+      "title": "Neural Networks meet Explicit Knowledge Representation: Towards Mechanistic Interpretability and Neuro-symbolic Modeling by-design",
+      "type": "Tutorial",
+      "category": "tutorial",
+      "format": "half-day",
+      "organizers": "Fabio Massimo Zanzotto, Elena Sofia Ruzzetti and Leonardo Ranaldi",
+      "description": "Topics: Transformers, Large Language Models (LLMs), Integrating KG in LLMs.",
+      "website": "",
+      "day": "day1",
+      "slots": [
+        1,
+        2
+      ],
+      "room": "pegaso",
+      "duration": "Half day · morning (09:00–12:50)"
     },
     {
       "id": "glow",
@@ -412,24 +429,6 @@
         4
       ],
       "room": "sez4",
-      "duration": "Half day · afternoon (14:10–18:00)"
-    },
-    {
-      "id": "haibridge",
-      "number": "22",
-      "title": "HAIBridge 2026: The 2nd Workshop on Bridging Hybrid (Artificial) Intelligence and the Semantic Web",
-      "type": "Workshop",
-      "category": "workshop",
-      "format": "half-day",
-      "organizers": "Alexis Ellis, Cogan Shimizu and Mark Adamik",
-      "description": "Abstract not provided by organizers.",
-      "website": "",
-      "day": "day1",
-      "slots": [
-        3,
-        4
-      ],
-      "room": "sez5",
       "duration": "Half day · afternoon (14:10–18:00)"
     },
     {
@@ -541,24 +540,6 @@
       "duration": "Half day · morning (09:00–12:50)"
     },
     {
-      "id": "iwss",
-      "number": "11",
-      "title": "International Workshop on Structures to Stories: Multilingual NLP for Semantic Structured Data (IWSS)",
-      "type": "Workshop",
-      "category": "workshop",
-      "format": "half-day",
-      "organizers": "Virginia Ramón Ferrer, Lia Draetta, Michael Oliverio, Rossana Damiano and Carlos Badenes-Olmedo",
-      "description": "Despite recent advances in LLM-based pipelines, the core multilingual Natural Language Processing (NLP) and Natural Language Generation (NLG) challenges of mapping between structured data and natural language, especially in low-resource and long-tail settings, remain largely unsolved and under-represented within the Semantic Web community.\n\nThe International Workshop on Structures to Stories: Multilingual NLP for Semantic Structured Data (IWSS) brings together researchers and practitioners advancing multilingual methods to (i) extract structured representations from text and (ii) generate faithful answers, verbalisations, explanations, and narratives grounded in structured evidence.\n\nIWSS emphasises robust extraction, data-grounded generation, and realistic multilingual evaluation, with particular interest in under-represented languages, long-tail entities, and culturally specific concepts.\n\nWe invite full and short papers, position and negative-result papers, datasets, system demos, and resource papers. Topics include faithful multilingual verbalisation and summarisation, entity extraction and linking, schema/ontology alignment, and low-resource benchmarks and evaluation, among others.",
-      "website": "https://iwss-workshop.github.io/",
-      "day": "day2",
-      "slots": [
-        1,
-        2
-      ],
-      "room": "sez5",
-      "duration": "Half day · morning (09:00–12:50)"
-    },
-    {
       "id": "spark",
       "number": "17",
       "title": "SPARK 2026 - First International Workshop on Spatial Intelligence and\nReasoning Enabled by Knowledge Graphs and Foundation Models",
@@ -595,24 +576,6 @@
       "duration": "Half day · morning (09:00–12:50)"
     },
     {
-      "id": "neuralnets",
-      "number": "495",
-      "title": "Neural Networks meet Explicit Knowledge Representation: Towards Mechanistic Interpretability and Neuro-symbolic Modeling by-design",
-      "type": "Tutorial",
-      "category": "tutorial",
-      "format": "half-day",
-      "organizers": "Fabio Massimo Zanzotto, Elena Sofia Ruzzetti and Leonardo Ranaldi",
-      "description": "Topics: Transformers, Large Language Models (LLMs), Integrating KG in LLMs.",
-      "website": "",
-      "day": "day2",
-      "slots": [
-        1,
-        2
-      ],
-      "room": "sez8",
-      "duration": "Half day · morning (09:00–12:50)"
-    },
-    {
       "id": "argo",
       "number": "501",
       "title": "ARGO: Agentic Retrieval and Graph Orchestration for Document Knowledge Systems",
@@ -627,7 +590,7 @@
         1,
         2
       ],
-      "room": "sez6",
+      "room": "sez5",
       "duration": "Half day · morning (09:00–12:50)"
     },
     {
@@ -663,7 +626,7 @@
         1,
         2
       ],
-      "room": "pegaso",
+      "room": "sez6",
       "duration": "Half day · morning (09:00–12:50)"
     },
     {
@@ -804,10 +767,10 @@
       "website": "",
       "day": "day1",
       "slots": [
-        3
+        4
       ],
       "room": "pegaso",
-      "duration": "Special session · single slot (14:10–15:50)"
+      "duration": "Special session · single slot (16:20–18:00)"
     },
     {
       "id": "dc-day2",
@@ -826,7 +789,7 @@
         3,
         4
       ],
-      "room": "orione",
+      "room": "pegaso",
       "duration": "Full day (09:00–18:00)"
     },
     {
@@ -844,7 +807,7 @@
         3,
         4
       ],
-      "room": "pegaso",
+      "room": "orione",
       "duration": "Half day · afternoon (14:10–18:00)"
     }
   ]
