@@ -590,7 +590,7 @@
         1,
         2
       ],
-      "room": "sez5",
+      "room": "sez6",
       "duration": "Half day · morning (09:00–12:50)"
     },
     {
@@ -608,7 +608,7 @@
         1,
         2
       ],
-      "room": "sez7",
+      "room": "sez8",
       "duration": "Half day · morning (09:00–12:50)"
     },
     {
@@ -626,7 +626,7 @@
         1,
         2
       ],
-      "room": "sez6",
+      "room": "sez7",
       "duration": "Half day · morning (09:00–12:50)"
     },
     {
@@ -760,10 +760,10 @@
       "number": "—",
       "title": "Doctoral Consortium",
       "type": "Doctoral Consortium",
-      "category": "other",
+      "category": "dc",
       "format": "special",
       "organizers": "",
-      "description": "Doctoral Consortium — a two-day event. Day 1 hosts a single-slot session, scheduled in the afternoon so it does not clash with the WikiKGQA workshop (shared organizer and DC co-chair Aidan Hogan) on Day 1 morning. The full-day programme runs on Day 2.",
+      "description": "Doctoral Consortium. Day 1 hosts a single-slot session, scheduled in the afternoon. The full-day programme runs on Day 2.",
       "website": "",
       "day": "day1",
       "slots": [
@@ -777,7 +777,7 @@
       "number": "—",
       "title": "Doctoral Consortium",
       "type": "Doctoral Consortium",
-      "category": "other",
+      "category": "dc",
       "format": "full-day",
       "organizers": "",
       "description": "Doctoral Consortium — full-day programme (Day 2), continuing the Day 1 session.",
@@ -809,6 +809,100 @@
       ],
       "room": "orione",
       "duration": "Half day · afternoon (14:10–18:00)"
+    },
+    {
+      "id": "mkg",
+      "number": "—",
+      "title": "Multi-dimensional Knowledge Graphs (MKG)",
+      "type": "Dagstuhl-Style Workshop",
+      "category": "dagstuhl",
+      "format": "full-day",
+      "organizers": "",
+      "description": "",
+      "website": "",
+      "day": "day1",
+      "slots": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "room": "orione",
+      "duration": "Full day (09:00–18:00)"
+    },
+    {
+      "id": "sawa",
+      "number": "—",
+      "title": "Semantic Affordances for the Web of Agents: Bridging Multi-Agent Systems, Semantic Web Services, and Agentic AI",
+      "type": "Dagstuhl-Style Workshop",
+      "category": "dagstuhl",
+      "format": "half-day",
+      "organizers": "",
+      "description": "",
+      "website": "",
+      "day": "day1",
+      "slots": [
+        1,
+        2
+      ],
+      "room": "auriga",
+      "duration": "Half day · morning (09:00–12:50)"
+    },
+    {
+      "id": "taapaai",
+      "number": "—",
+      "title": "Towards Agendas for Advancing Personal Agentic Artificial Intelligence (TAAPAAI)",
+      "type": "Dagstuhl-Style Workshop",
+      "category": "dagstuhl",
+      "format": "half-day",
+      "organizers": "",
+      "description": "",
+      "website": "",
+      "day": "day1",
+      "slots": [
+        3,
+        4
+      ],
+      "room": "auriga",
+      "duration": "Half day · afternoon (14:10–18:00)"
+    },
+    {
+      "id": "charged",
+      "number": "—",
+      "title": "Computational cHallenges fRom hiGhly divErse Data (CHARGED)",
+      "type": "Dagstuhl-Style Workshop",
+      "category": "dagstuhl",
+      "format": "full-day",
+      "organizers": "",
+      "description": "",
+      "website": "https://dhlab-nl.github.io/charged-workshop/",
+      "day": "day2",
+      "slots": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "room": "auriga",
+      "duration": "Full day (09:00–18:00)"
+    },
+    {
+      "id": "redq",
+      "number": "—",
+      "title": "Rethinking Data Quality for Generative AI and Knowledge Graphs (ReDQ)",
+      "type": "Dagstuhl-Style Workshop",
+      "category": "dagstuhl",
+      "format": "half-day",
+      "organizers": "",
+      "description": "",
+      "website": "https://redq-workshop.github.io/",
+      "day": "day2",
+      "slots": [
+        1,
+        2
+      ],
+      "room": "orione",
+      "duration": "Half day · morning (09:00–12:50)"
     }
   ]
 }
